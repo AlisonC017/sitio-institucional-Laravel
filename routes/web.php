@@ -7,5 +7,5 @@ Route::get('/', function () {
 });
 
 Route::get('/app', function () {
-    return view('app');
+    return view('modules.index');
 });
