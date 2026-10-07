@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    @include('layouts.css')
+    @include('layouts.landing.css')
 </head>
 
 <body>
@@ -25,7 +25,7 @@
 
 
     <!-- Navbar Start -->
-    @include('layouts.header')
+    @include('layouts.landing.header')
     <!-- Navbar End -->
 
 
@@ -35,14 +35,14 @@
 
 
     <!-- Footer Start -->
-    @include('layouts.footer')
+    @include('layouts.landing.footer')
     <!-- Footer End -->
 
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-    @include('layouts.js')
+    @include('layouts.landing.js')
 
 </body>
 
