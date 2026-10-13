@@ -25,4 +25,7 @@ Route::get('/app', function () {
 Route::resource('slides', ControllerSlider::class);
 Route::resource('noticias', ControllerNoticias::class);
 Route::resource('galeria', ControllerGaleria::class);
-Route::resource('contacto', ControllerContactos::class);
+Route::get('contacto', [ControllerContactos::class, 'index'])->name('contacto.index');
+Route::post('contacto', [ControllerContactos::class, 'guardar'])->name('contacto.guardar');
+Route::get('app/contacto', [ControllerContactos::class, 'publico'])->name('landing.contacto');
+Route::post('app/contacto', [ControllerContactos::class, 'enviar'])->name('landing.contacto.enviar');
