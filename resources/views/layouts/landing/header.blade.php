@@ -10,7 +10,7 @@
             <a href="{{ route('landing.index') }}" class="nav-item nav-link active">Inicio</a>
             <a href="{{ route('noticias.index') }}" class="nav-item nav-link">Noticias</a>
             <a href="{{ route('galeria.index') }}" class="nav-item nav-link">Galería</a>
-            <a href="{{ route('contacto.index') }}" class="nav-item nav-link">Contacto</a>
+            <a href="{{ route('landing.contacto') }}" class="nav-item nav-link">Contacto</a>
         </div>
         <a href="{{ route('admin.index') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block"> Admin<i
                 class="fa fa-arrow-right ms-3"></i></a>
