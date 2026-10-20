@@ -35,3 +35,5 @@ Route::post('contacto', [ControllerContactos::class, 'guardar'])->name('contacto
 Route::get('app/contacto', [ControllerContactos::class, 'publico'])->name('landing.contacto');
 Route::post('app/contacto', [ControllerContactos::class, 'enviar'])->name('landing.contacto.enviar');
 
+Route::get('app/noticias', [ControllerNoticias::class, 'publico'])->name('landing.noticias');
+Route::get('app/noticias/{id}', [ControllerNoticias::class, 'detalle'])->name('landing.noticias.show');

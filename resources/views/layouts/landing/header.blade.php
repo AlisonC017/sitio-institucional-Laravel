@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="{{ route('landing.index') }}" class="nav-item nav-link active">Inicio</a>
-            <a href="{{ route('noticias.index') }}" class="nav-item nav-link">Noticias</a>
+            <a href="{{ route('landing.noticias') }}" class="nav-item nav-link">Noticias</a>
             <a href="{{ route('galeria.index') }}" class="nav-item nav-link">Galería</a>
             <a href="{{ route('landing.contacto') }}" class="nav-item nav-link">Contacto</a>
         </div>
