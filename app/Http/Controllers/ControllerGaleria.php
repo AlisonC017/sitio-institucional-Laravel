@@ -4,62 +4,93 @@ namespace App\Http\Controllers;
 
 use App\Models\Foto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ControllerGaleria extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Admin: listado
     public function index()
     {
-        //
+        $fotos = Foto::all();
+        return view('modules.admin.galeria.index', compact('fotos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Admin: formulario de creación
     public function create()
     {
-        //
+        $foto = new Foto();
+        $route = route('galeria.store');
+        return view('modules.admin.galeria.form', compact('foto', 'route'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Admin: guardar
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'descripcion' => 'required|string|max:255',
+            'imagen'      => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $foto = new Foto();
+        $foto->descripcion = $request->descripcion;
+        $foto->imagen = $request->file('imagen')->store('uploads/galeria', 'public');
+        $foto->save();
+
+        return redirect()->route('galeria.index')->with('ok', 'Foto guardada correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Foto $foto)
+    // Admin: formulario de edición
+    public function edit($id)
     {
-        //
+        $foto = Foto::findOrFail($id);
+        $route = route('galeria.update', $foto->id_foto);
+        return view('modules.admin.galeria.form', compact('foto', 'route'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Foto $foto)
+    // Admin: actualizar
+    public function update(Request $request, $id)
     {
-        //
+        $foto = Foto::findOrFail($id);
+
+        $request->validate([
+            'descripcion' => 'required|string|max:255',
+            'imagen'      => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $foto->descripcion = $request->descripcion;
+
+        if ($request->hasFile('imagen')) {
+            $anterior = $foto->imagen;
+            $foto->imagen = $request->file('imagen')->store('uploads/galeria', 'public');
+
+            if ($anterior) {
+                Storage::disk('public')->delete($anterior);
+            }
+        }
+
+        $foto->save();
+
+        return redirect()->route('galeria.index')->with('ok', 'Foto actualizada correctamente');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Foto $foto)
+    // Admin: eliminar
+    public function destroy($id)
     {
-        //
+        $foto = Foto::findOrFail($id);
+
+        if ($foto->imagen) {
+            Storage::disk('public')->delete($foto->imagen);
+        }
+
+        $foto->delete();
+
+        return redirect()->route('galeria.index')->with('ok', 'Foto eliminada correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Foto $foto)
+    // Sitio público
+    public function publico()
     {
-        //
+        $fotos = Foto::all();
+        return view('modules.landing.galeria.index', compact('fotos'));
     }
 }

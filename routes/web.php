@@ -23,11 +23,17 @@ Route::get('/app', function () {
 
 
 Route::resource('slides', ControllerSlider::class);
+
 Route::resource('noticias', ControllerNoticias::class);
+
 Route::resource('galeria', ControllerGaleria::class);
+Route::get('app/galeria', [ControllerGaleria::class, 'publico'])->name('landing.galeria');
+Route::resource('galeria', ControllerGaleria::class)->except(['show'])->parameters(['galeria' => 'foto']);
+
 Route::get('contacto', [ControllerContactos::class, 'index'])->name('contacto.index');
 Route::post('contacto', [ControllerContactos::class, 'guardar'])->name('contacto.guardar');
 Route::get('app/contacto', [ControllerContactos::class, 'publico'])->name('landing.contacto');
 Route::post('app/contacto', [ControllerContactos::class, 'enviar'])->name('landing.contacto.enviar');
+
 Route::get('app/noticias', [ControllerNoticias::class, 'publico'])->name('landing.noticias');
 Route::get('app/noticias/{id}', [ControllerNoticias::class, 'detalle'])->name('landing.noticias.show');
