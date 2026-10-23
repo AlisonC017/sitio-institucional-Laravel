@@ -15,13 +15,13 @@
             @forelse ($noticias as $noticia)
                 <div class="row g-4 align-items-center pb-4 mb-4 border-bottom">
                     <div class="col-md-4">
-                        <img src="{{ asset('storage/' . $noticia->imagen) }}" alt="{{ $noticia->titulo }}"
-                            class="img-fluid rounded w-100" style="height: 220px; object-fit: cover;">
+                        <img src="{{ asset($noticia->imagen) }}" alt="{{ $noticia->titulo }}" class="img-fluid rounded w-100"
+                            style="height: 220px; object-fit: cover;">
                     </div>
                     <div class="col-md-8">
                         <h4 class="mb-3">{{ $noticia->titulo }}</h4>
                         <p class="text-secondary">{{ Str::limit($noticia->contenido, 200) }}</p>
-                        <a href="{{ route('noticias.show', $noticia->id_noticia) }}" class="btn btn-primary">
+                        <a href="{{ route('landing.noticias.show', $noticia->id_noticia) }}" class="btn btn-primary">
                             Leer más
                         </a>
                     </div>

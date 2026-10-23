@@ -35,8 +35,8 @@
 
                     @if ($foto->exists && $foto->imagen)
                         <div class="mb-2">
-                            <img src="{{ asset('storage/' . $foto->imagen) }}" alt="{{ $foto->descripcion }}"
-                                class="rounded" style="height: 120px;">
+                            <img src="{{ asset($foto->imagen) }}" alt="{{ $foto->descripcion }}" class="rounded"
+                                style="height: 120px;">
                         </div>
                     @endif
 

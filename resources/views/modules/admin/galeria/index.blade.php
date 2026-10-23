@@ -27,8 +27,8 @@
                     @forelse ($fotos as $foto)
                         <div class="col-6 col-md-4 col-xl-3">
                             <div class="card h-100 border">
-                                <img src="{{ asset('storage/' . $foto->imagen) }}" alt="{{ $foto->descripcion }}"
-                                    class="card-img-top" style="height: 180px; object-fit: cover;">
+                                <img src="{{ asset($foto->imagen) }}" alt="{{ $foto->descripcion }}" class="card-img-top"
+                                    style="height: 180px; object-fit: cover;">
                                 <div class="card-body text-center">
                                     <p class="small mb-3">{{ $foto->descripcion }}</p>
 
@@ -37,8 +37,7 @@
                                         <i class="fa fa-pen"></i>
                                     </a>
 
-                                    <form action="{{ route('galeria.destroy', $foto->id_foto) }}" method="POST"
-                                        class="d-inline"
+                                    <form action="{{ route('galeria.destroy', $foto->id_foto) }}" method="POST" class="d-inline"
                                         onsubmit="return confirm('¿Eliminar esta foto?');">
                                         @csrf
                                         @method('DELETE')

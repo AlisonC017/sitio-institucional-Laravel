@@ -15,7 +15,7 @@
         <div class="card border-0 shadow rounded-4 overflow-hidden">
 
             <div class="bg-light text-center p-3">
-                <img src="{{ asset('storage/' . $slide->imagen) }}" alt="{{ $slide->titulo }}" class="img-fluid rounded-3"
+                <img src="{{ asset($slide->imagen) }}" alt="{{ $slide->titulo }}" class="img-fluid rounded-3"
                     style="width: 100%; max-height: 500px; object-fit: contain;">
             </div>
 

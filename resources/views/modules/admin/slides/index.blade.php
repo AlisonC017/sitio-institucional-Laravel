@@ -37,8 +37,8 @@
                                 <tr>
                                     <td>{{ $slide->id_slide }}</td>
                                     <td>
-                                        <img src="{{ asset('storage/' . $slide->imagen) }}" alt="{{ $slide->titulo }}"
-                                            class="rounded" style="width: 200px; height: 120px; object-fit: cover;">
+                                        <img src="{{ asset($slide->imagen) }}" alt="{{ $slide->titulo }}" class="rounded"
+                                            style="width: 200px; height: 120px; object-fit: cover;">
                                     </td>
                                     <td class="fw-semibold">{{ $slide->titulo }}</td>
                                     <td class="text-muted">{{ $slide->descripcion }}</td>

@@ -28,7 +28,7 @@
                     <label class="form-label">Logo de la institución (JPG o PNG, máx. 2 MB)</label>
                     @if ($contacto->logo)
                         <div class="mb-2">
-                            <img src="{{ asset('storage/' . $contacto->logo) }}" alt="Logo" style="height: 80px;">
+                            <img src="{{ asset($contacto->logo) }}" alt="Logo" style="height: 80px;">
                         </div>
                     @endif
                     <input type="file" name="logo" class="form-control">
@@ -54,8 +54,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Correo electrónico</label>
-                    <input type="email" name="correo" class="form-control"
-                        value="{{ old('correo', $contacto->correo) }}">
+                    <input type="email" name="correo" class="form-control" value="{{ old('correo', $contacto->correo) }}">
                 </div>
 
                 <div class="mb-3">

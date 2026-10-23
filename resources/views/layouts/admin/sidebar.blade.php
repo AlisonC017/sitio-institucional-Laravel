@@ -5,14 +5,18 @@
         </a>
 
         <div class="navbar-nav w-100">
-            <a href="{{ route('slides.index') }}" class="nav-item nav-link active"><i
+            <a href="{{ route('slides.index') }}"
+                class="nav-item nav-link {{ request()->routeIs('slides.*') ? 'active' : '' }}"><i
                     class="fa fa-layer-group me-2"></i>Slider</a>
-            <a href="{{ route('noticias.index') }}" class="nav-item nav-link"><i
+            <a href="{{ route('noticias.index') }}"
+                class="nav-item nav-link {{ request()->routeIs('noticias.*') ? 'active' : '' }}"><i
                     class="fa fa-table me-2"></i>Noticias</a>
-            <a href="{{ route('galeria.index') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Galería</a>
-            <a href="{{ route('contacto.index') }}" class="nav-item nav-link"><i
+            <a href="{{ route('galeria.index') }}"
+                class="nav-item nav-link {{ request()->routeIs('galeria.*') ? 'active' : '' }}"><i
+                    class="fa fa-th me-2"></i>Galería</a>
+            <a href="{{ route('contacto.index') }}"
+                class="nav-item nav-link {{ request()->routeIs('contacto.*') ? 'active' : '' }}"><i
                     class="fa fa-keyboard me-2"></i>Contacto</a>
-
         </div>
     </nav>
 </div>

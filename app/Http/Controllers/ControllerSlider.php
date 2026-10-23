@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Slide;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ControllerSlider extends Controller
 {
@@ -46,14 +46,14 @@ class ControllerSlider extends Controller
         $slide->descripcion = $request->descripcion;
 
         $imagen = $request->file('imagen');
-        $ruta = $imagen->store('uploads/slides', 'public');
-        $slide->imagen = $ruta;
+        $nombre = time() . '_' . uniqid() . '.' . $imagen->getClientOriginalExtension();
+        $imagen->move(public_path('uploads/slides'), $nombre);
+        $slide->imagen = 'uploads/slides/' . $nombre;
 
         $slide->save();
 
         return redirect()->route('slides.index');
     }
-
 
     /**
      * Display the specified resource.
@@ -84,14 +84,16 @@ class ControllerSlider extends Controller
 
         if ($request->hasFile('imagen')) {
             $imagenAnterior = $slide->imagen;
-            $imagen = $request->file('imagen');
-            $ruta = $imagen->store('uploads/slides', 'public');
 
-            $slide->imagen = $ruta;
+            $imagen = $request->file('imagen');
+            $nombre = time() . '_' . uniqid() . '.' . $imagen->getClientOriginalExtension();
+            $imagen->move(public_path('uploads/slides'), $nombre);
+            $slide->imagen = 'uploads/slides/' . $nombre;
+
             $slide->save();
 
-            if ($imagenAnterior && Storage::disk('public')->exists($imagenAnterior)) {
-                Storage::disk('public')->delete($imagenAnterior);
+            if ($imagenAnterior && File::exists(public_path($imagenAnterior))) {
+                File::delete(public_path($imagenAnterior));
             }
         } else {
             $slide->save();
@@ -105,8 +107,8 @@ class ControllerSlider extends Controller
      */
     public function destroy(Slide $slide)
     {
-        if ($slide->imagen && Storage::disk('public')->exists($slide->imagen)) {
-            Storage::disk('public')->delete($slide->imagen);
+        if ($slide->imagen && File::exists(public_path($slide->imagen))) {
+            File::delete(public_path($slide->imagen));
         }
 
         $slide->delete();

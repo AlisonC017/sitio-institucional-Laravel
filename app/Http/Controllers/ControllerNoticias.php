@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Noticia;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ControllerNoticias extends Controller
 {
@@ -41,7 +40,12 @@ class ControllerNoticias extends Controller
         $noticia = new Noticia();
         $noticia->titulo = $request->titulo;
         $noticia->contenido = $request->contenido;
-        $noticia->imagen = $request->file('imagen')->store('uploads/noticias', 'public');
+
+        $imagen = $request->file('imagen');
+        $nombre = time() . '_' . uniqid() . '.' . $imagen->getClientOriginalExtension();
+        $imagen->move(public_path('uploads/noticias'), $nombre);
+        $noticia->imagen = 'uploads/noticias/' . $nombre;
+
         $noticia->save();
 
         return redirect()->route('noticias.index');
@@ -80,10 +84,14 @@ class ControllerNoticias extends Controller
 
         if ($request->hasFile('imagen')) {
             $anterior = $noticia->imagen;
-            $noticia->imagen = $request->file('imagen')->store('uploads/noticias', 'public');
 
-            if ($anterior && Storage::disk('public')->exists($anterior)) {
-                Storage::disk('public')->delete($anterior);
+            $imagen = $request->file('imagen');
+            $nombre = time() . '_' . uniqid() . '.' . $imagen->getClientOriginalExtension();
+            $imagen->move(public_path('uploads/noticias'), $nombre);
+            $noticia->imagen = 'uploads/noticias/' . $nombre;
+
+            if ($anterior && file_exists(public_path($anterior))) {
+                unlink(public_path($anterior));
             }
         }
 
@@ -96,15 +104,13 @@ class ControllerNoticias extends Controller
      */
     public function destroy(Noticia $noticia)
     {
-
-        if ($noticia->imagen && Storage::disk('public')->exists($noticia->imagen)) {
-            Storage::disk('public')->delete($noticia->imagen);
+        if ($noticia->imagen && file_exists(public_path($noticia->imagen))) {
+            unlink(public_path($noticia->imagen));
         }
 
         $noticia->delete();
         return redirect()->route('noticias.index');
     }
-
     public function publico()
     {
         $noticias = Noticia::orderBy('id_noticia', 'desc')->get();

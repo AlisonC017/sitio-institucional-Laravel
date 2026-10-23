@@ -36,8 +36,8 @@
                                 <tr>
                                     <td>{{ $noticia->id_noticia }}</td>
                                     <td>
-                                        <img src="{{ asset('storage/' . $noticia->imagen) }}" alt="{{ $noticia->titulo }}"
-                                            class="rounded" style="width: 200px; height: 120px; object-fit: cover;">
+                                        <img src="{{ asset($noticia->imagen) }}" alt="{{ $noticia->titulo }}" class="rounded"
+                                            style="width: 200px; height: 120px; object-fit: cover;">
                                     </td>
                                     <td class="fw-semibold">{{ $noticia->titulo }}</td>
                                     <td class="text-muted">{{ $noticia->contenido }}</td>

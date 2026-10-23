@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Foto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ControllerGaleria extends Controller
 {
@@ -33,7 +32,12 @@ class ControllerGaleria extends Controller
 
         $foto = new Foto();
         $foto->descripcion = $request->descripcion;
-        $foto->imagen = $request->file('imagen')->store('uploads/galeria', 'public');
+
+        $imagen = $request->file('imagen');
+        $nombre = time() . '_' . uniqid() . '.' . $imagen->getClientOriginalExtension();
+        $imagen->move(public_path('uploads/galeria'), $nombre);
+        $foto->imagen = 'uploads/galeria/' . $nombre;
+
         $foto->save();
 
         return redirect()->route('galeria.index')->with('ok', 'Foto guardada correctamente');
@@ -61,10 +65,14 @@ class ControllerGaleria extends Controller
 
         if ($request->hasFile('imagen')) {
             $anterior = $foto->imagen;
-            $foto->imagen = $request->file('imagen')->store('uploads/galeria', 'public');
 
-            if ($anterior) {
-                Storage::disk('public')->delete($anterior);
+            $imagen = $request->file('imagen');
+            $nombre = time() . '_' . uniqid() . '.' . $imagen->getClientOriginalExtension();
+            $imagen->move(public_path('uploads/galeria'), $nombre);
+            $foto->imagen = 'uploads/galeria/' . $nombre;
+
+            if ($anterior && file_exists(public_path($anterior))) {
+                unlink(public_path($anterior));
             }
         }
 
@@ -78,8 +86,8 @@ class ControllerGaleria extends Controller
     {
         $foto = Foto::findOrFail($id);
 
-        if ($foto->imagen) {
-            Storage::disk('public')->delete($foto->imagen);
+        if ($foto->imagen && file_exists(public_path($foto->imagen))) {
+            unlink(public_path($foto->imagen));
         }
 
         $foto->delete();

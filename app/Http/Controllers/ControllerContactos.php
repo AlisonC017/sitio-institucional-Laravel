@@ -6,7 +6,6 @@ use App\Mail\ContactoMail;
 use App\Models\Contacto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
 class ControllerContactos extends Controller
 {
@@ -32,16 +31,24 @@ class ControllerContactos extends Controller
 
         $contacto = Contacto::first() ?? new Contacto();
         $contacto->fill($request->only([
-            'nombre_empresa', 'direccion', 'telefono',
-            'correo', 'facebook', 'instagram',
+            'nombre_empresa',
+            'direccion',
+            'telefono',
+            'correo',
+            'facebook',
+            'instagram',
         ]));
 
         if ($request->hasFile('logo')) {
             $anterior = $contacto->logo;
-            $contacto->logo = $request->file('logo')->store('uploads/contacto', 'public');
 
-            if ($anterior && Storage::disk('public')->exists($anterior)) {
-                Storage::disk('public')->delete($anterior);
+            $logo = $request->file('logo');
+            $nombre = time() . '_' . uniqid() . '.' . $logo->getClientOriginalExtension();
+            $logo->move(public_path('uploads/contacto'), $nombre);
+            $contacto->logo = 'uploads/contacto/' . $nombre;
+
+            if ($anterior && file_exists(public_path($anterior))) {
+                unlink(public_path($anterior));
             }
         }
 
