@@ -42,6 +42,7 @@
                                     <td class="fw-semibold">{{ $noticia->titulo }}</td>
                                     <td class="text-muted">{{ $noticia->contenido }}</td>
                                     <td class="text-center">
+                                        <div class="d-flex flex-column align-items-center gap-2">
                                         <a class="btn btn-sm btn-outline-primary me-1" title="Editar"
                                             href="{{ route('noticias.edit', $noticia->id_noticia) }}">
                                             <i class="fa fa-pen"></i>
@@ -54,6 +55,7 @@
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

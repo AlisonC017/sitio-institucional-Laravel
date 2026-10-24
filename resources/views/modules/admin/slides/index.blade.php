@@ -42,7 +42,10 @@
                                     </td>
                                     <td class="fw-semibold">{{ $slide->titulo }}</td>
                                     <td class="text-muted">{{ $slide->descripcion }}</td>
-                                    <td class="text-center">
+
+                                     <td class="text-center">
+                                         <div class="d-flex flex-column align-items-center gap-2">
+                                       
                                         <a class="btn btn-sm btn-outline-primary me-1" title="Editar"
                                             href="{{ route('slides.edit', $slide->id_slide) }}">
                                             <i class="fa fa-pen"></i>
@@ -51,10 +54,12 @@
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar" >
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
+
+                                         </div>
                                     </td>
                                 </tr>
 

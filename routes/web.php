@@ -10,12 +10,12 @@ use App\Models\Slide;
 use App\Models\Noticia;
 
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     $data = Slide::all();
     return view('modules.admin.slides.index', compact('data'));
 })->name('admin.index');
 
-Route::get('/app', function () {
+Route::get('/', function () {
     $data = Slide::all();
     $noticias = Noticia::topTresRecientes();
     return view('modules.landing.slides.index', compact('data', 'noticias'));

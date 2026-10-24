@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ControllerContactos extends Controller
 {
-    // admin, parte dle formulairo 
+    // admin, parte del formulario 
     public function index()
     {
         $contacto = Contacto::first() ?? new Contacto();

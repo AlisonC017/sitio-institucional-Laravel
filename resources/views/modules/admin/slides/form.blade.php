@@ -4,7 +4,7 @@
 @section('tituloPrincipal', $slide->id_slide > 0 ? 'Editar Slide' : 'Crear Slide')
 
 @section('contenido')
-    <div class="container-xxl position-relative bg-white d-flex p-0">
+    <div class="container-xxl position-relative bg-white d-flex p-0 m-0">
 
         <!-- Content Start -->
         <div class="content">
@@ -12,8 +12,8 @@
             <!-- Form Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light rounded h-100 p-4">
+                    <div class="col-12 col-lg-10">
+                        <div class="bg-light rounded h-100 p-4" style="margin-left: -224px; ">
 
                             <h6 class="mb-4">
                                 {{ $slide->id_slide > 0 ? 'Editar Slide' : 'Crear Slide' }}

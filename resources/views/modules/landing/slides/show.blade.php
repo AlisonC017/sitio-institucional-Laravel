@@ -7,7 +7,7 @@
     <div class="container py-5">
 
         <div class="mb-4">
-            <a href="{{ url('/app') }}" class="btn btn-outline-secondary rounded-pill px-4">
+            <a href="{{ route('landing.index') }}" class="btn btn-outline-secondary rounded-pill px-4">
                 <i class="fa fa-arrow-left me-2"></i>Volver al inicio
             </a>
         </div>
@@ -36,7 +36,7 @@
                 </p>
 
                 <div class="mt-5 pt-3 border-top">
-                    <a href="{{ url('/app') }}" class="btn rounded-pill px-4 py-2 text-white"
+                    <a href="{{ route('landing.index') }}" class="btn rounded-pill px-4 py-2 text-white"
                         style="background-color: #06BBCC;">
                         <i class="fa fa-home me-2"></i>Regresar al inicio
                     </a>

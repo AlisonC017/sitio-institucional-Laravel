@@ -7,6 +7,13 @@
         <div class="container">
             <div class="text-center">
                 <h6 class="section-title bg-white text-center text-primary px-3">Contacto</h6>
+
+                @if ($contacto?->logo)
+                <div class="my-4">
+                    <img src="{{ asset($contacto->logo)}}" alt="Logo {{ $contacto->nombre_empresa }}" class="img-fluid" style="max-height: 120px; width:auto;">
+                </div>
+                @endif
+
                 <h1 class="mb-5">{{ $contacto?->nombre_empresa }}</h1>
             </div>
 

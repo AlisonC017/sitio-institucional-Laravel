@@ -1,7 +1,7 @@
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
         <a href="{{ route('landing.index') }}" class="navbar-brand mx-4 mb-3">
-            <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Ir a App</h3>
+            <h3 class="text-primary"><i class="fa fa-hashtag me-2 p-2"></i>Ir a App</h3>
         </a>
 
         <div class="navbar-nav w-100">
