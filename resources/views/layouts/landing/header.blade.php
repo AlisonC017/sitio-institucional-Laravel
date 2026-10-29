@@ -1,7 +1,18 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+
+
     <a href="{{ route('landing.index') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>Sitio Institucional Laravel - Grupo #3</h2>
+        @if ($institucion?->logo)
+            <img src="{{ asset($institucion->logo) }}" alt="Logo {{ $institucion->nombre_empresa }}" class="me-3"
+                style="max-height: 50px; width:auto;">
+        @else
+            <i class=" fa fa-book me-3 text-primary "></i>
+        @endif
+        <h2 class="m-0 text-primary">
+            {{ $institucion?->nombre_empresa ?? 'Sitio Institucional Laravel - Grupo #3' }}
+        </h2>
     </a>
+
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
